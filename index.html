@@ -106,12 +106,12 @@
     <button class="secondary" onclick="needTime()">I need time 💭</button>
   </div>
 
-  <!-- 🎵 BACKGROUND MELODY (UPLOAD music.mp3 TO GITHUB) -->
-  <audio id="music" loop>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+  <!-- 🎵 AUDIO (SOURCE SET BY JS FOR MOBILE SAFETY) -->
+  <audio id="music" loop preload="auto"></audio>
 
   <script>
+    let fadeInterval;
+
     function showLove() {
       alert("I love you ❤️");
       alert("I miss you so much 💕");
@@ -133,7 +133,30 @@
     }
 
     function playMusic() {
-      document.getElementById("music").play();
+      const music = document.getElementById("music");
+
+      // attach source after user gesture (mobile rule)
+      if (!music.src) {
+        music.src = "music.mp3";
+      }
+
+      music.volume = 0;
+      music.play().then(() => {
+        fadeInMusic(music);
+      }).catch(() => {
+        alert("Tap Play Music once more 🎵");
+      });
+    }
+
+    function fadeInMusic(music) {
+      clearInterval(fadeInterval);
+      fadeInterval = setInterval(() => {
+        if (music.volume < 0.7) {
+          music.volume = Math.min(music.volume + 0.02, 0.7);
+        } else {
+          clearInterval(fadeInterval);
+        }
+      }, 200);
     }
 
     // Floating hearts
