@@ -1,1 +1,153 @@
-# for-pariii
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 320px;
+      width: 90%;
+      z-index: 2;
+      animation: pop 1s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      color: #ff4d6d;
+      font-size: 24px;
+    }
+
+    p {
+      color: #555;
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 12px;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 30px;
+      background: #ff4d6d;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .secondary {
+      background: #ffc2d1;
+      color: #333;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      color: rgba(255, 77, 109, 0.7);
+      font-size: 20px;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="card" id="page1">
+    <h1>Hey pariiiii 💗 ❤️</h1>
+    <p>I made this just for you…</p>
+
+    <button onclick="showLove()">Tap Me 💕</button><br>
+    <button onclick="playMusic()">Play Music 🎵</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="card" id="page2" style="display:none;">
+    <h1>Will you forgive me, pariiiii 💗?</h1>
+    <p>No matter what you choose, I respect you.</p>
+
+    <button onclick="yesForgive()">Yes 💖</button><br>
+    <button class="secondary" onclick="needTime()">I need time 💭</button>
+  </div>
+
+  <audio id="music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function showLove() {
+      alert("I love you ❤️");
+      alert("I miss you so much 💕");
+      alert("I'm so sorry for everything 😔");
+      alert("I promise to do better, always 💖");
+
+      document.getElementById("page1").style.display = "none";
+      document.getElementById("page2").style.display = "block";
+    }
+
+    function yesForgive() {
+      alert("Thank you for forgiving me 🥹💖");
+      alert("I will never take you for granted again ❤️");
+    }
+
+    function needTime() {
+      alert("I understand 💗");
+      alert("I’ll wait, because you’re worth it 🕊️");
+    }
+
+    function playMusic() {
+      document.getElementById("music").play();
+    }
+
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (15 + Math.random() * 20) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }, 400);
+  </script>
+
+</body>
+</html>
